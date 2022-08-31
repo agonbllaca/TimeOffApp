@@ -33,11 +33,17 @@ This app is build based on a online hosted DB so you will need to provide config
 create a config.env file which has the below key value paris:
 
 NODE_ENV=development
+
 PORT=3030
-DATABASE= "link to connect to the online DB
+
+DATABASE= "link to connect to the online DB"
+
 DATABASE_PASSWORD= "password"
+
 JWT_SECRET = ultra-secure-and-long-secret
+
 JWT_EXPIRES_IN=90d
+
 JWT_COOKIE_EXPIRES_IN=90
 
 
