@@ -16,7 +16,7 @@ Install the dependencies of backend by:
     
     Opening the backend folder with VS code and typing "npm install"
     or try from the root folder with
-    "cd backend && npm run start"
+    "cd backend && npm install"
 	
 To start the application , open 2 terminals and run the below separately
 
