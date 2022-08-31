@@ -20,7 +20,7 @@ Install the dependencies of backend by:
 	
 To start the application , open 2 terminals and run the below separately
 
-1) for Backend the port is 3030
+1) for Backend the port is dependent on PORT value in config.env
     
     npm run startbackend
 
