@@ -3,8 +3,8 @@
 This is a simple time off application , UI is simple but API support more functionality
 
 # Api documentation
-Documentation of the API can be found in the following link:
-https://documenter.getpostman.com/view/23100935/VUxNS8Nc
+
+Documentation of the API can be found in the following link: https://documenter.getpostman.com/view/23100935/VUxNS8Nc
 
 ## Usage
 
@@ -21,7 +21,7 @@ Install the dependencies of backend by:
 To start the application , open 2 terminals and run the below separately
 
 1) for Backend the port is 3030
-    By default, the development server runs on port 8088.
+    npm run startbackend
 2) For UI the port is 8089
 	npm start
 
