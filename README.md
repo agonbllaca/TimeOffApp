@@ -21,13 +21,17 @@ Install the dependencies of backend by:
 To start the application , open 2 terminals and run the below separately
 
 1) for Backend the port is 3030
+    
     npm run startbackend
+
 2) For UI the port is 8089
-	npm start
+	
+    npm start
 
 ## What you need to provide
 This app is build based on a online hosted DB so you will need to provide configurations to acomodate that
 create a config.env file which has the below key value paris:
+
 NODE_ENV=development
 PORT=3030
 DATABASE= "link to connect to the online DB
