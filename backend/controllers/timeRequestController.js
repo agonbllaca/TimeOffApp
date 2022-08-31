@@ -181,8 +181,7 @@ exports.getRequestReport = catchAsync(async (req, res, next) => {
 
   let user = await User.findById(reqUserId);
 
-  userArray = user.map((item) => item._id);
-  const docs = await Request.find({ userId: { $in: userArray } });
+  const docs = await Request.find({ userId: user._id });
   const json2csv = new Parser({ fields: fields });
   csv = json2csv.parse(docs);
   res.attachment(`${user.firstName}_TimeOffReport.csv`);
@@ -199,8 +198,8 @@ exports.getEmployeeRequestReport = catchAsync(async (req, res, next) => {
     );
    }
 
-  userArray = user.map((item) => item._id);
-  const docs = await Request.find({ userId: { $in: userArray } });
+  
+  const docs = await Request.find({ userId: user._id });
   const json2csv = new Parser({ fields: fields });
   csv = json2csv.parse(docs);
   res.attachment(`${user.firstName}_TimeOffReport.csv`);
