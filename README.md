@@ -1,40 +1,40 @@
-# Cx Starter Kit
+# Time Off App
 
-This is the boilerplate for new [CxJS](https://cxjs.io/) projects.
+This is a simple time off application , UI is simple but API support more functionality
+
+# Api documentation
+Documentation of the API can be found in the following link:
+https://documenter.getpostman.com/view/23100935/VUxNS8Nc
 
 ## Usage
 
-Install required packages by running:
+Install required packages for UI by running in the terminal:
 	
-	npm install
-	
-in the root folder. You can start the demo app by:
+	npm install 
 
-	npm start
-	
-By default, the development server runs on port 8088.
-
-    npm run build
+Install the dependencies of backend by:
     
-Create a production build.
+    Opening the backend folder with VS code and typing "npm install"
+    or try from the root folder with
+    "cd backend && npm run start"
+	
+To start the application , open 2 terminals and run the below separately
 
-## Goals
+1) for Backend the port is 3030
+    By default, the development server runs on port 8088.
+2) For UI the port is 8089
+	npm start
 
-- provide a starting point for Cx developers
-- repository of best practices 
-- demonstrate usage of:
-    - Widgets
-    - Layouts
-    - Charts
-    - Routing
-- provide ready to use examples of typical application pages
-    - admin pages
-    - dashboard pages
-- recommend scalable project structure
-- example of advanced webpack usage    
-    - hot reload
-    - production builds
-    - code splitting
-    - on demand code loading
+## What you need to provide
+This app is build based on a online hosted DB so you will need to provide configurations to acomodate that
+create a config.env file which has the below key value paris:
+NODE_ENV=development
+PORT=3030
+DATABASE= "link to connect to the online DB
+DATABASE_PASSWORD= "password"
+JWT_SECRET = ultra-secure-and-long-secret
+JWT_EXPIRES_IN=90d
+JWT_COOKIE_EXPIRES_IN=90
+
 
     
