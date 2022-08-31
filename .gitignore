@@ -1,0 +1,10 @@
+/node_modules
+/npm-debug.log
+
+/backend/config.env
+/backend/package-lock.json
+/backend/node_modules
+
+.idea
+
+dist

@@ -1,0 +1,49 @@
+{
+  "name": "timeoffapplication_ui",
+  "version": "1.0.0",
+  "description": "Container folder for front end and back end",
+  "keywords": [
+    "UI",
+    "Web",
+    "Widgets",
+    "Charts",
+    "React"
+  ],
+  "author": "Agon Bllaca",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "scripts": {
+    "start": "webpack-dev-server --config config/webpack.dev.js --open",
+    "startbackend":"cd backend && npm run start"
+  },
+  "dependencies": {
+    "base-64": "^0.1.0",
+    "casual": "^1.6.2",
+    "cx": "^18.10.7",
+    "cx-react": "^17.10.0",
+    "deep-equal": "^1.0.1",
+    "generate-random-data": "0.0.3",
+    "marked": "^0.3.7",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "uuid": "^8.3.2",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-cx-env": "^17.6.2",
+    "babel-preset-env": "^1.7.0",
+    "copy-webpack-plugin": "^4.2.3",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-merge": "^4.1.1"
+  }
+}

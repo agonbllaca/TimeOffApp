@@ -1,0 +1,92 @@
+const catchAsync = require("./../utils/catchAsync");
+const AppError = require("./../utils/appError");
+const APIFeatures = require("./../utils/apiFeatures");
+
+//generic delete method
+exports.deleteOne = (Model) =>
+  catchAsync(async (req, res, next) => {
+    //Tour.findOneAndDelete({ _id=req.params.id })
+    const doc = await Model.findByIdAndDelete(req.params.id);
+    if (!doc) {
+      return next(new AppError(`No document found with that ID`, 404));
+    }
+    res.status(204).json({
+      status: "success",
+      data: null,
+    });
+  });
+
+exports.createOne = (Model) =>
+  catchAsync(async (req, res, next) => {
+    // try {
+    const doc = await Model.create(req.body);
+
+    res.status(201).json({
+      status: "success",
+      data: { data: doc },
+    });
+  });
+
+exports.updateOne = (Model) =>
+  catchAsync(async (req, res, next) => {
+    const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!doc) {
+      return next(new AppError(`No document found with that ID`, 404));
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        data: doc,
+      },
+    });
+  });
+
+exports.getOne = (Model, populateOptions) =>
+  catchAsync(async (req, res, next) => {
+    let query = Model.findById(req.params.id);
+    //.popoulate() will get the object , not only the ids
+    if (populateOptions) query = query.populate(populateOptions);
+    const doc = await query;
+
+    if (!doc) {
+      return next(new AppError(`No document found with that ID`, 404));
+    }
+    console.log(doc);
+    res.status(200).json({
+      status: "success",
+      data: {
+        data: doc,
+      },
+    });
+  });
+
+exports.getAll = (Model) =>
+  catchAsync(async (req, res, next) => {
+    // To allow for nested GET reviews on tour (hack)
+    let filter = {};
+
+    // EXECUTE QUERY
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
+
+    // .explain is for statistics on query performance
+    //const doc = await features.query.explain();
+    const doc = await features.query;
+
+    //send response
+    res.status(200).json({
+      status: "success",
+      results: doc.length,
+      data: {
+        data: doc,
+      },
+    });
+  });
