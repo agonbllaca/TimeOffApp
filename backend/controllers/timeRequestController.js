@@ -71,7 +71,7 @@ exports.createRequest = catchAsync(async (req, res, next) => {
 });
 
 exports.approveRequest = catchAsync(async (req, res, next) => {
-  const { userId, canceled, days, requestType } = await Request.findById(
+  const { userId,approved, canceled, days, requestType } = await Request.findById(
     req.params.id
   );
   const userObj = await User.findById(userId);
@@ -84,7 +84,10 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
     );
   } // Throw error if request is cancelled
   if (canceled) {
-    return next(new AppError("Request is already cancelled", 403));
+    return next(new AppError("Request is already cancelled", 400));
+  }
+  if (approved) {
+    return next(new AppError("Request is already approved", 400));
   }
 
   const approvedRequest = await Request.findByIdAndUpdate(req.params.id, {
@@ -118,7 +121,7 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
 });
 
 exports.denyRequest = catchAsync(async (req, res, next) => {
-  const { userId, approved } = await Request.findById(req.params.id);
+  const { userId, approved ,canceled} = await Request.findById(req.params.id);
   const { employeeManager } = await User.findById(userId);
 
   if (!req.user._id.equals(employeeManager)) {
@@ -128,6 +131,9 @@ exports.denyRequest = catchAsync(async (req, res, next) => {
   }
   if (approved) {
     return next(new AppError("Request is already approved", 400));
+  }
+  if (canceled) {
+    return next(new AppError("Request is already canceled", 400));
   }
 
   const approvedRequest = await Request.findByIdAndUpdate(req.params.id, {
