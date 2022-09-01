@@ -90,7 +90,7 @@ exports.createAdmin = catchAsync(async (req, res, next) => {
 exports.login = catchAsync(async (req, res, next) => {
   const { userName, password } = req.body;
 
-  // 1) Check if email and password exist
+  // 1) Check if username and password exist
   if (!userName || !password) {
     return next(new AppError("Please provide username and password!", 400));
   }
@@ -99,7 +99,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // if there is no user or password is not correct return error
   if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new AppError("Incorrect email or password", 401));
+    return next(new AppError("Username or password", 401));
   }
   // 3) If everything is ok , send token to client
   createSendToken(user, 200, res);

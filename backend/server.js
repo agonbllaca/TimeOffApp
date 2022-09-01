@@ -3,11 +3,6 @@ const dotenv = require("dotenv");
 const nodeCron = require("node-cron");
 const userController = require("./controllers/userController");
 
-const testCron = () => {
-  nodeCron.schedule("* * * * *", () => {
-    console.log("running a task every minute");
-  });
-};
 //Catching uncaught Exception
 process.on("uncaughtException", (err) => {
   console.log("UNHANDLED REJECTION , SHUTTING DOWN ...");
