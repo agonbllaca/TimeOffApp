@@ -76,8 +76,9 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
   );
   const userObj = await User.findById(userId);
 
+  console.log(userObj,req.user._id , !req.user._id.equals(userObj.employeeManager) , typeof req.user._id , typeof userObj.employeeManager)
   // Throw error if you are not the employee manager
-  if (req.user._id !== userObj.employeeManager) {
+  if (!req.user._id.equals(userObj.employeeManager)) {
     return next(
       new AppError("You are not authorized to approve this request", 403)
     );
@@ -88,7 +89,7 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
 
   const approvedRequest = await Request.findByIdAndUpdate(req.params.id, {
     approved: true,
-  });
+  }, {new: true});
 
   const updateBody = {};
   if (requestType === "PTO" && days <= availableDays(userObj, requestType)) {
@@ -106,7 +107,7 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
   } else {
     return next(new AppError(`Exceeded available ${requestType} days`, 400));
   }
-  const updatedUser = await User.findByIdAndUpdate(userId, updateBody);
+  const updatedUser = await User.findByIdAndUpdate(userId, updateBody, {new: true});
 
   res.status(200).json({
     status: "success",
@@ -120,7 +121,7 @@ exports.denyRequest = catchAsync(async (req, res, next) => {
   const { userId, approved } = await Request.findById(req.params.id);
   const { employeeManager } = await User.findById(userId);
 
-  if (req.user._id !== employeeManager) {
+  if (!req.user._id.equals(employeeManager)) {
     return next(
       new AppError("You are not authorized to cancel this request", 403)
     );
@@ -131,7 +132,7 @@ exports.denyRequest = catchAsync(async (req, res, next) => {
 
   const approvedRequest = await Request.findByIdAndUpdate(req.params.id, {
     canceled: true,
-  });
+  },{new: true});
 
   res.status(200).json({
     status: "success",
@@ -192,7 +193,7 @@ exports.getEmployeeRequestReport = catchAsync(async (req, res, next) => {
  
    let user = await User.findById(req.params.userId);
 
-   if(req.user._id !== user.employeeManager){
+   if(!req.user._id.equals(user.employeeManager)){
     return next(
       new AppError("You are not the employee manager", 403)
     );

@@ -30,7 +30,7 @@ router
   );
 
 router.use(authController.protect);
-router.route("/").post(timeRequestController.createRequest);
+router.route("/").post(authController.restrictTo("employee"),timeRequestController.createRequest);
 
 router.route("/:id").get(timeRequestController.getRequest);
 

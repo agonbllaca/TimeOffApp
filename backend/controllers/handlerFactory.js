@@ -5,7 +5,6 @@ const APIFeatures = require("./../utils/apiFeatures");
 //generic delete method
 exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
-    //Tour.findOneAndDelete({ _id=req.params.id })
     const doc = await Model.findByIdAndDelete(req.params.id);
     if (!doc) {
       return next(new AppError(`No document found with that ID`, 404));
@@ -67,7 +66,6 @@ exports.getOne = (Model, populateOptions) =>
 
 exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
-    // To allow for nested GET reviews on tour (hack)
     let filter = {};
 
     // EXECUTE QUERY
