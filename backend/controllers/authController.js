@@ -99,7 +99,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   // if there is no user or password is not correct return error
   if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new AppError("Username or password", 401));
+    return next(new AppError("Incorrect username or password", 401));
   }
   // 3) If everything is ok , send token to client
   createSendToken(user, 200, res);
@@ -167,3 +167,17 @@ exports.restrictTo = (...roles) => {
   };
 };
 
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  let user = await User.findById(req.params.id);
+  if(!req.body.password){
+    return next(
+      new AppError("Please provide a new password", 400)
+    );
+  }
+
+  user.password = req.body.password
+
+  await user.save();
+  
+  res.status(200).json({ status: "success", data: user});
+})

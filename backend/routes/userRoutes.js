@@ -29,6 +29,13 @@ router
   .get(userController.getAllUsers)
 
 router
+    .route('/reset-password/:id')
+    .patch(
+      authController.protect,
+      authController.restrictTo('admin'),
+      authController.resetPassword)
+
+router
   .route("/:id")
   .get(userController.getUser)
   .patch(authController.protect

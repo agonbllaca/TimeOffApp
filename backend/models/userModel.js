@@ -81,7 +81,7 @@ const userSchema = new mongoose.Schema({
 //middleware to encrypt the password before saving to DB
 userSchema.pre("save", async function(next) {
   //Only run this function if password is modified
-  if (!this.isModified("password")) return next();
+  //if (!this.isModified("password")) return next();
   //Asyncronus version , Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
