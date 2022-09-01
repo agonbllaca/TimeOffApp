@@ -47,4 +47,7 @@ JWT_EXPIRES_IN=90d
 JWT_COOKIE_EXPIRES_IN=90
 
 
-    
+## Node Version
+The Node version while developing this app was:
+
+v10.24.1
