@@ -83,7 +83,7 @@ exports.approveRequest = catchAsync(async (req, res, next) => {
       new AppError("You are not authorized to approve this request", 403)
     );
   } // Throw error if request is cancelled
-  if (!canceled) {
+  if (canceled) {
     return next(new AppError("Request is already cancelled", 400));
   }
   if (approved) {
@@ -132,7 +132,7 @@ exports.denyRequest = catchAsync(async (req, res, next) => {
   if (approved) {
     return next(new AppError("Request is already approved", 400));
   }
-  if (!canceled) {
+  if (canceled) {
     return next(new AppError("Request is already canceled", 400));
   }
 
