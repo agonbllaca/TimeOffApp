@@ -68,12 +68,18 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     let filter = {};
 
+    
+
     // EXECUTE QUERY
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
       .sort()
       .limitFields()
       .paginate();
+    
+      console.log(features)
+      console.log('--------------' )
+      console.log(req.query)
 
     // .explain is for statistics on query performance
     //const doc = await features.query.explain();

@@ -28,9 +28,8 @@ class APIFeatures {
     if (this.queryString.sort) {
       const sorter = this.queryString.sort.split(',').join(' ');
       this.query = this.query.sort(sorter);
-      //sort('price')
     } else {
-      this.query = this.query.sort('-createdAt');
+      this.query = this.query.sort('firstName');
     }
 
     return this;

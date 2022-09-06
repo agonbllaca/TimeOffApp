@@ -1,4 +1,3 @@
-const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
@@ -15,10 +14,6 @@ const userRouter = require("./routes/userRoutes");
 const timeRequestsRouter = require("./routes/timeRequestRoutes");
 
 const app = express();
-
-// app.set("view engine", "pug");
-// app.set("views", path.join(__dirname, "views"));
-
 // 1 - MIDDLEWARES
 
 //SET SECURITY HTTP HEADERS WITH HELMET
@@ -33,6 +28,7 @@ app.use(cors())
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+
 // LIMIT REQUESTS FROM THE SAME API
 const limiter = rateLimit({
   max: 100,
@@ -66,25 +62,15 @@ app.use(xss());
 app.use(
   hpp({
     whitelist: [
-      "duration",
-      "ratingsAverage",
-      "ratingsQuantity",
-      "maxGroupSize",
-      "difficulty",
-      "price",
+      "firstName",
+      "lastName",
+      "employeeType",
+      "sickLeaveDays",
+      "carryPtoDays",
+      "ptoDays",
     ], // whitelist fields which can be duplicated
   })
 );
-
-// SERVING STATIC FILES
-app.use(express.static(`${__dirname}/public`));
-
-//TESTING MIDDLEWARE
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString();
-  //console.log(req.cookies);
-  next();
-});
 
 // mounting the routers
 app.use("/api/v1/users", userRouter);

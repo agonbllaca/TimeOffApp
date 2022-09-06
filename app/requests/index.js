@@ -87,7 +87,7 @@ export default <cx>
                         }
                     },
                     {
-                        field: '_id', sortable: true,
+                        field: '_id', sortable: false,
                         header: {
                             items: <cx>
                                     Report
@@ -107,7 +107,7 @@ export default <cx>
                             </cx>
                         },
                         items: <cx>
-                        <LinkButton  mod="primary" href:tpl="http://localhost:3030/api/v1/timeRequests/report/{$record._id}"> 
+                        <LinkButton  enabled-expr="{$record.role}==='employee'"  mod="primary" href:tpl="http://localhost:3030/api/v1/timeRequests/report/{$record._id}"> 
                             Report <Glyph  name="download"/>
                         </LinkButton>
                         </cx>,
